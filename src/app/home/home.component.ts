@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../core/auth.service";
+import { tap } from "rxjs/operators";
 
 @Component({
   selector: "app-home",
@@ -7,11 +8,16 @@ import { AuthService } from "../core/auth.service";
   styleUrls: ["./home.component.scss"]
 })
 export class HomeComponent implements OnInit {
-  private isAuthenticated: boolean;
+  isAuthenticated = false;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
+    this.authService.authSubject$.subscribe(
+      isAuth => (this.isAuthenticated = isAuth)
+    );
+
+    // if session expires and we reload a page
     this.isAuthenticated = this.authService.isAuthenticated();
   }
 
