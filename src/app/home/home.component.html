@@ -1,0 +1,7 @@
+<h1>
+  Home
+</h1>
+<a *ngIf="isAuthenticated" [routerLink]="['/profile']">
+  View profile
+</a>
+<button *ngIf="!isAuthenticated" (click)="login()">Login In</button>
