@@ -11,6 +11,8 @@ const { auth0_domain, auth0_client_id, auth0_callback } = environment;
   providedIn: "root"
 })
 export class AuthService {
+  userProfile = null;
+
   auth0 = new auth0.WebAuth({
     domain: auth0_domain,
     clientID: auth0_client_id,
@@ -70,5 +72,32 @@ export class AuthService {
   logout() {
     this.session.reset();
     this.authSubject.next(false);
+    this.auth0.logout({
+      clientId: auth0_client_id,
+      returnTo: "http://localhost:4200"
+    });
+  }
+
+  getAccesstoken() {
+    const accessToken = this.session.get("access_token");
+    if (accessToken) {
+      return accessToken;
+    }
+
+    throw new Error("No access token found");
+  }
+
+  getProfile(cb) {
+    if (this.userProfile) {
+      return cb(this.userProfile);
+    }
+
+    this.auth0.client.userInfo(this.getAccesstoken(), (err, profile) => {
+      if (profile) {
+        this.userProfile = profile;
+      }
+
+      cb(profile, err);
+    });
   }
 }

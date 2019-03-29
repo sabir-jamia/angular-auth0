@@ -9,14 +9,14 @@ export class SessionService {
   constructor() {}
 
   set(items: Record<string, string>): void {
-    this.sessionKeys.map(key => localStorage.setItem(key, items[key]));
+    this.sessionKeys.map(key => sessionStorage.setItem(key, items[key]));
   }
 
   get(key: string): string {
-    return localStorage.getItem(key);
+    return sessionStorage.getItem(key);
   }
 
   reset() {
-    this.sessionKeys.map(key => localStorage.removeItem(key));
+    this.sessionKeys.map(key => sessionStorage.removeItem(key));
   }
 }

@@ -1,3 +1,12 @@
+<h1>
+  Profile
+</h1>
 <p>
-  profile works!
+  {{ profile?.nickname }}
 </p>
+<img
+  [ngStyle]="{ 'max-width': '50px', 'max-height': '50px' }"
+  src="{{ profile?.picture }}"
+  alt="profile pic"
+/>
+<pre>{{ profile | json }}</pre>

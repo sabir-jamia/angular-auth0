@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  auth0_domain: "angular-auth0-dev.auth0.com",
-  auth0_client_id: "SVCxKaIZVEkKXQiqzLWweK8KxdrSxi39",
+  auth0_domain: "angularjmi-dev.auth0.com",
+  auth0_client_id: "1RQ7NV3j0be3t7j2Xm7EY0Gwmqgttlxe",
   auth0_callback: "http://localhost:4200/callback"
 };
 
