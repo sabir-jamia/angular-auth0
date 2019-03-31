@@ -1,31 +1,33 @@
 import { Injectable } from "@angular/core";
 import * as auth0 from "auth0-js";
 import { environment } from "../../environments/environment";
-import { Router } from "@angular/router";
 import { SessionService } from "./session.service";
-import { BehaviorSubject } from "rxjs";
+import { Router } from "@angular/router";
+import { ProfileModel } from "../shared/model/profile.model";
 
-const { auth0_domain, auth0_client_id, auth0_callback } = environment;
+const {
+  auth0_domain,
+  auth0_client_id,
+  auth0_callback,
+  auth0_audience
+} = environment;
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
-  userProfile = null;
+  userProfile: ProfileModel = null;
 
   auth0 = new auth0.WebAuth({
     domain: auth0_domain,
     clientID: auth0_client_id,
     redirectUri: auth0_callback,
+    audience: auth0_audience,
     responseType: "token id_token",
     scope: "openid profile email"
   });
 
-  authSubject = new BehaviorSubject<boolean>(null);
-
-  authSubject$ = this.authSubject.asObservable();
-
-  constructor(private session: SessionService) {}
+  constructor(private session: SessionService, private router: Router) {}
 
   login() {
     this.auth0.authorize();
@@ -35,9 +37,9 @@ export class AuthService {
     this.auth0.parseHash((error, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
-        this.authSubject.next(true);
+        this.router.navigate(["/home"]);
       } else if (error) {
-        this.authSubject.next(false);
+        this.router.navigate(["/home"]);
         alert(`Error: ${error.error}Check the console for furthur details`);
         console.log(error);
       }
@@ -60,18 +62,11 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     const expiresAt = JSON.parse(this.session.get("expires_at"));
-    const isExpired = new Date().getTime() > expiresAt;
-    if (isExpired) {
-      this.authSubject.next(false);
-      return false;
-    }
-
-    return true;
+    return new Date().getTime() > expiresAt ? false : true;
   }
 
   logout() {
     this.session.reset();
-    this.authSubject.next(false);
     this.auth0.logout({
       clientId: auth0_client_id,
       returnTo: "http://localhost:4200"
@@ -87,17 +82,23 @@ export class AuthService {
     throw new Error("No access token found");
   }
 
-  getProfile(cb) {
+  getProfile(): Promise<ProfileModel> {
     if (this.userProfile) {
-      return cb(this.userProfile);
+      return Promise.resolve(this.userProfile);
     }
 
-    this.auth0.client.userInfo(this.getAccesstoken(), (err, profile) => {
-      if (profile) {
-        this.userProfile = profile;
-      }
+    return new Promise((resolve, reject) => {
+      this.auth0.client.userInfo(this.getAccesstoken(), (error, profile) => {
+        if (error) {
+          reject(error);
+        }
 
-      cb(profile, err);
+        this.userProfile = {
+          nickname: profile.nickname,
+          picture: profile.picture
+        };
+        resolve(this.userProfile);
+      });
     });
   }
 }

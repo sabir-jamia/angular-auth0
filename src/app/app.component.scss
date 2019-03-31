@@ -1,3 +1,15 @@
 .container {
-  margin: 1em;
+  margin: 5vh;
+  min-height: 80vh;
+}
+
+.nav {
+  min-height: 10vh;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
 }

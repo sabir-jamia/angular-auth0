@@ -1,4 +1,9 @@
-<app-nav></app-nav>
+<div class="nav">
+  <app-nav></app-nav>
+</div>
 <div class="container">
   <router-outlet></router-outlet>
+  <div *ngIf="loading" class="loading">
+    <app-spinner></app-spinner>
+  </div>
 </div>

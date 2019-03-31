@@ -4,12 +4,12 @@ import { CommonModule } from "@angular/common";
 import { throwIfAlreadyLoaded } from "./import.guard";
 import { NavComponent } from "./nav/nav.component";
 import { RouterModule } from "@angular/router";
-import { CallbackComponent } from "./callback/callback.component";
+import { SpinnerComponent } from "./spinner/spinner.component";
 
 @NgModule({
-  declarations: [NavComponent, CallbackComponent],
+  declarations: [NavComponent, SpinnerComponent],
   imports: [CommonModule, RouterModule],
-  exports: [NavComponent]
+  exports: [NavComponent, SpinnerComponent]
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
