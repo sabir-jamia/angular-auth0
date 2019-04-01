@@ -1,21 +1,21 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
   Resolve,
   ActivatedRouteSnapshot,
   RouterStateSnapshot
-} from "@angular/router";
-import { HttpClient } from "@angular/common/http";
-import { Observable, of } from "rxjs";
+} from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
 
-import { environment } from "src/environments/environment";
-import { MessageResolved } from "../shared/model/message.model";
-import { AuthService } from "../core/auth.service";
-import { catchError } from "rxjs/operators";
+import { environment } from 'src/environments/environment';
+import { MessageResolved } from '../shared/model/message.model';
+import { AuthService } from '../core/auth.service';
+import { catchError } from 'rxjs/operators';
 
 const { auth0_api } = environment;
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class PrivateResolver implements Resolve<any> {
   constructor(private http: HttpClient, private authService: AuthService) {}
