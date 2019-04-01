@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { PrivateComponent } from './private.component';
 import { Routes, RouterModule, Router } from '@angular/router';
 import { PrivateResolver } from './private.resolver';
-import { AuthGuardService } from '../core/auth.guard';
+import { AuthGuardService } from '../auth/auth.guard';
 
 const routes: Routes = [
   {

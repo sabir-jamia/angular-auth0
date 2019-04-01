@@ -4,9 +4,10 @@
     <li><a [routerLink]="['profile']">Profile</a></li>
     <li><a [routerLink]="['public']">Public</a></li>
     <li><a [routerLink]="['private']">Private</a></li>
+    <li><a [routerLink]="['course']">Courses</a></li>
     <li>
       <button (click)="isAuthenticated ? logout() : login()">
-        {{ isAuthenticated ? "Logout" : "Login" }}
+        {{ isAuthenticated ? 'Logout' : 'Login' }}
       </button>
     </li>
   </ul>

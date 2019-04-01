@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class SessionService {
-  sessionKeys = ["access_token", "id_token", "expires_at"];
+  sessionKeys = ['access_token', 'id_token', 'expires_at', 'scopes'];
 
   constructor() {}
 

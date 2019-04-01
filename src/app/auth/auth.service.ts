@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { WebAuth } from 'auth0-js';
 import { environment } from '../../environments/environment';
-import { SessionService } from './session.service';
+import { SessionService } from '../core/session.service';
 import { Router } from '@angular/router';
 import { ProfileModel } from '../shared/model/profile.model';
+import { JsonPipe } from '@angular/common';
 
 const {
   auth0_domain,
@@ -18,13 +19,15 @@ const {
 export class AuthService {
   userProfile: ProfileModel = null;
 
+  requestedScope = 'openid profile email read:courses';
+
   auth0 = new WebAuth({
     domain: auth0_domain,
     clientID: auth0_client_id,
     redirectUri: auth0_callback,
     audience: auth0_audience,
     responseType: 'token id_token',
-    scope: 'openid profile email'
+    scope: this.requestedScope
   });
 
   constructor(private session: SessionService, private router: Router) {}
@@ -51,10 +54,13 @@ export class AuthService {
       authResult.expiresIn * 1000 + new Date().getTime()
     );
 
+    const scopes = authResult.scope || this.requestedScope || '';
+
     const items: Record<string, string> = {
       access_token: authResult.accessToken,
       id_token: authResult.idToken,
-      expires_at: expiresAt
+      expires_at: expiresAt,
+      scopes: JSON.stringify(scopes)
     };
 
     this.session.set(items);
@@ -100,5 +106,13 @@ export class AuthService {
         resolve(this.userProfile);
       });
     });
+  }
+
+  userHasScopes(scopes: []): boolean {
+    const grantedScopes = (JSON.parse(this.session.get('scopes')) || '').split(
+      ' '
+    );
+
+    return scopes.every(scope => grantedScopes.inckudes(scope));
   }
 }

@@ -10,6 +10,7 @@ import { CallBackModule } from './callback/callback.module';
 import { HttpClientModule } from '@angular/common/http';
 import { PublicModule } from './public/public.module';
 import { PrivateModule } from './private/private.module';
+import { CourseModule } from './course/course.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +23,7 @@ import { PrivateModule } from './private/private.module';
     PrivateModule,
     PrfoileModule,
     CallBackModule,
+    CourseModule,
     AppRoutingModule
   ],
   bootstrap: [AppComponent]

@@ -1,31 +1,24 @@
 import { Injectable } from '@angular/core';
-import {
-  Resolve,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot
-} from '@angular/router';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Resolve } from '@angular/router';
 import { Observable, of } from 'rxjs';
-
-import { environment } from 'src/environments/environment';
-import { MessageResolved } from '../shared/model/message.model';
-import { AuthService } from '../auth/auth.service';
+import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
+
+import { CourseResolved } from './course.model';
+import { environment } from 'src/environments/environment';
+import { AuthService } from '../auth/auth.service';
 
 const { auth0_api } = environment;
 
 @Injectable({
   providedIn: 'root'
 })
-export class PrivateResolver implements Resolve<any> {
+export class CourseResolver implements Resolve<CourseResolved> {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  resolve(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<MessageResolved> {
+  resolve(): Observable<CourseResolved> {
     return this.http
-      .get<MessageResolved>(`${auth0_api}/private`, {
+      .get<CourseResolved>(`${auth0_api}/courses`, {
         headers: {
           Authorization: `Bearer ${this.authService.getAccesstoken()}`
         }
@@ -33,11 +26,11 @@ export class PrivateResolver implements Resolve<any> {
       .pipe(catchError(error => this.handleError(error)));
   }
 
-  handleError(error): Observable<MessageResolved> {
+  handleError(error): Observable<CourseResolved> {
     const errorMessage = `Retrieval Error ${error.message}`;
 
     return of({
-      message: null,
+      courses: null,
       error: errorMessage
     });
   }
