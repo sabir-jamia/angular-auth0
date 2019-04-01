@@ -1,19 +1,20 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
   Resolve,
   ActivatedRouteSnapshot,
   RouterStateSnapshot
-} from "@angular/router";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+} from '@angular/router';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
-import { environment } from "src/environments/environment";
-import { Message } from "../shared/model/message.model";
+import { environment } from 'src/environments/environment';
+import { MessageResolved } from '../shared/model/message.model';
 
 const { auth0_api } = environment;
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class PublicResolver implements Resolve<any> {
   constructor(private http: HttpClient) {}
@@ -21,7 +22,17 @@ export class PublicResolver implements Resolve<any> {
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<Message> {
-    return this.http.get<Message>(`${auth0_api}/public`);
+  ): Observable<MessageResolved> {
+    return this.http
+      .get<MessageResolved>(`${auth0_api}/public`)
+      .pipe(catchError(error => this.handleError(error)));
+  }
+
+  handleError(error: any): Observable<MessageResolved> {
+    const errorMessage = `Retrieval Error ${error.message}`;
+    return of({
+      message: null,
+      error: errorMessage
+    });
   }
 }

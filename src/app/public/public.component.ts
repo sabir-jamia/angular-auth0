@@ -1,10 +1,11 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { MessageResolved } from '../shared/model/message.model';
 
 @Component({
-  selector: "app-public",
-  templateUrl: "./public.component.html",
-  styleUrls: ["./public.component.scss"]
+  selector: 'app-public',
+  templateUrl: './public.component.html',
+  styleUrls: ['./public.component.scss']
 })
 export class PublicComponent implements OnInit {
   message = null;
@@ -12,6 +13,7 @@ export class PublicComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.message = this.route.snapshot.data.public.message;
+    const data: MessageResolved = this.route.snapshot.data.public;
+    this.message = data.error ? data.error : data.message;
   }
 }

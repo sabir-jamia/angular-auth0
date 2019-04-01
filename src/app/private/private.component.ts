@@ -15,11 +15,6 @@ export class PrivateComponent implements OnInit {
 
   ngOnInit() {
     const data: MessageResolved = this.route.snapshot.data.private;
-
-    if (data.error) {
-      this.message = data.error;
-    } else {
-      this.message = data.message;
-    }
+    this.message = data.error ? data.error : data.message;
   }
 }
