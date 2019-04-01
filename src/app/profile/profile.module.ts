@@ -1,10 +1,9 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { ProfileComponent } from "./profile.component";
+import { NgModule } from '@angular/core';
+import { SharedModule } from '../shared/shared.module';
+import { ProfileRoutingModule } from './profile-routing.module';
 
 @NgModule({
-  declarations: [ProfileComponent],
-  imports: [CommonModule],
-  exports: [ProfileComponent]
+  declarations: ProfileRoutingModule.components,
+  imports: [SharedModule, ProfileRoutingModule]
 })
 export class PrfoileModule {}
