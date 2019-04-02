@@ -1,4 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
 body {
   margin: 0;
   padding: 0;
@@ -6,7 +7,7 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Melno, Monaco, Consolas, "Courier New",
+  font-family: source-code-pro, Melno, Monaco, Consolas, 'Courier New',
     monospace;
 }
 ol,

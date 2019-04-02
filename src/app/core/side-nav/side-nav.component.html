@@ -1,0 +1,14 @@
+<mat-sidenav-container class="side-nav-container">
+  <mat-sidenav mode="over" #sidenav class="side-nav">
+    <mat-toolbar color="primary">My Menu</mat-toolbar>
+    <mat-list role="list">
+      <mat-list-item role="listitem">Item 1</mat-list-item>
+      <mat-list-item role="listitem">Item 2</mat-list-item>
+      <mat-list-item role="listitem">Item 3</mat-list-item>
+    </mat-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-toolbar (toggleSideNav)="sidenav.toggle()"></app-toolbar>
+    <div class="wrapper"><router-outlet></router-outlet></div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
