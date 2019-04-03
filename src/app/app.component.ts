@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 import {
   Router,
   Event,
@@ -6,17 +6,17 @@ import {
   NavigationEnd,
   NavigationCancel,
   NavigationError
-} from "@angular/router";
+} from '@angular/router';
 
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"]
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   loading = false;
 
-  title = "angular-auth0";
+  title = 'angular-auth0';
 
   constructor(private router: Router) {
     this.router.events.subscribe((routerEvent: Event) =>
@@ -26,7 +26,7 @@ export class AppComponent {
 
   checkRouterEvents(routerEvent: Event) {
     if (routerEvent instanceof NavigationStart) {
-      console.log("start");
+      console.log('start');
       this.loading = true;
     }
 
@@ -35,7 +35,7 @@ export class AppComponent {
       routerEvent instanceof NavigationCancel ||
       routerEvent instanceof NavigationError
     ) {
-      console.log("end");
+      console.log('end');
       this.loading = false;
     }
   }

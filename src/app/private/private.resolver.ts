@@ -4,7 +4,7 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot
 } from '@angular/router';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
@@ -33,7 +33,7 @@ export class PrivateResolver implements Resolve<any> {
       .pipe(catchError(error => this.handleError(error)));
   }
 
-  handleError(error): Observable<MessageResolved> {
+  handleError(error: Error): Observable<MessageResolved> {
     const errorMessage = `Retrieval Error ${error.message}`;
 
     return of({

@@ -1,5 +1,15 @@
 <mat-toolbar color="primary">
-  <button mat-button (click)="toggleSideNav.emit()">
-    <mat-icon>menu</mat-icon></button
-  >My App</mat-toolbar
->
+  <mat-toolbar-row>
+    <button mat-button (click)="toggleSideNav.emit()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>My App</span>
+    <span class="app-spacer"></span>
+    <mat-icon class="auth-icon" *ngIf="isAuthenticated" (click)="logout()">
+      power_settings_new
+    </mat-icon>
+    <mat-icon class="auth-icon" *ngIf="!isAuthenticated" (click)="login()">
+      exit_to_app
+    </mat-icon>
+  </mat-toolbar-row>
+</mat-toolbar>

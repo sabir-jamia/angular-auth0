@@ -1,1 +1,27 @@
-<mat-card><h1>Main content</h1> </mat-card>
+<mat-sidenav-container class="side-nav-container">
+  <mat-sidenav
+    mode="side"
+    opened="true"
+    #sidenav
+    class="side-nav mat-elevation-z10"
+  >
+    <mat-toolbar color="primary">My Menu</mat-toolbar>
+    <mat-nav-list>
+      <mat-list-item *ngFor="let menu of menus">
+        <a matLine [routerLink]="menu.link">{{ menu.name }}</a>
+        <mat-icon>{{ menu.icon }}</mat-icon>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-toolbar (toggleSideNav)="sidenav.toggle()"></app-toolbar>
+    <div *ngIf="loading" class="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+    <div class="wrapper">
+      <mat-card>
+        <router-outlet></router-outlet>
+      </mat-card>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
