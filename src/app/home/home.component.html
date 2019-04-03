@@ -4,4 +4,11 @@
 <a *ngIf="isAuthenticated" [routerLink]="['/profile']">
   View profile
 </a>
-<button *ngIf="!isAuthenticated" (click)="login()">Login In</button>
+<button
+  mat-raised-button
+  color="primary"
+  *ngIf="!isAuthenticated"
+  (click)="login()"
+>
+  Login In
+</button>

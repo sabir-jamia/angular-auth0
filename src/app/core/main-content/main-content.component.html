@@ -8,8 +8,11 @@
     <mat-toolbar color="primary">My Menu</mat-toolbar>
     <mat-nav-list>
       <mat-list-item *ngFor="let menu of menus">
-        <a matLine [routerLink]="menu.link">{{ menu.name }}</a>
-        <mat-icon>{{ menu.icon }}</mat-icon>
+        <a matLine [routerLink]="menu.link" [ngStyle]="{ display: 'flex' }">
+          <span [ngStyle]="{ padding: '3px' }">{{ menu.name }}</span>
+          <span class="app-spacer"></span>
+          <mat-icon>{{ menu.icon }}</mat-icon>
+        </a>
       </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
