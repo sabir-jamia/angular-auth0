@@ -1,18 +1,23 @@
-<form novalidate [formGroup]="login" (ngSubmit)="submit()">
-  <div class="login-container">
-    <mat-form-field>
-      <input formControlName="email" matInput placeholder="Email" />
-    </mat-form-field>
-
-    <mat-form-field>
-      <input
-        formControlName="password"
-        matInput
-        placeholder="Password"
-        type="password"
-      />
-    </mat-form-field>
-  </div>
-  <button mat-raised-button color="primary">Submit</button>
-</form>
-<button mat-raised-button color="accent">Via Auth0</button>
+<mat-card-content>
+  <form novalidate [formGroup]="loginForm" (ngSubmit)="submit()">
+    <div class="login-container">
+      <mat-form-field>
+        <input formControlName="email" matInput placeholder="Email" />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          formControlName="password"
+          matInput
+          placeholder="Password"
+          type="password"
+        />
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary">Submit</button>
+  </form>
+</mat-card-content>
+<mat-card-actions>
+  <button (click)="login()" mat-raised-button color="accent">
+    Via Auth0
+  </button>
+</mat-card-actions>

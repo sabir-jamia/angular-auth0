@@ -3,6 +3,12 @@
   flex-direction: column;
 }
 
-.login-container > * {
-  width: 100%;
+mat-card-actions {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+
+form {
+  padding: 20px 0;
 }

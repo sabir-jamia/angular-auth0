@@ -15,4 +15,6 @@ export class MainContentComponent {
   ];
 
   @Input() loading = false;
+
+  @Input() isAuthenticated = false;
 }

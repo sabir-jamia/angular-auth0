@@ -1,0 +1,21 @@
+<mat-card class="login-mat-card">
+  <nav mat-tab-nav-bar>
+    <a
+      mat-tab-link
+      routerLinkActive
+      #rlaLogin="routerLinkActive"
+      [active]="rlaLogin.isActive"
+      [routerLink]="['/auth', 'login']"
+      >Login</a
+    >
+    <a
+      mat-tab-link
+      routerLinkActive
+      #rlaRegister="routerLinkActive"
+      [active]="rlaRegister.isActive"
+      [routerLink]="['/auth', 'register']"
+      >Register</a
+    >
+  </nav>
+  <router-outlet></router-outlet>
+</mat-card>

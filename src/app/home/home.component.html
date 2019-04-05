@@ -1,14 +1,16 @@
-<h1>
-  Home
-</h1>
-<a *ngIf="isAuthenticated" [routerLink]="['/profile']">
-  View profile
-</a>
-<button
-  mat-raised-button
-  color="primary"
-  *ngIf="!isAuthenticated"
-  (click)="login()"
->
-  Login In
-</button>
+<mat-card
+  ><h1>
+    Home
+  </h1>
+  <a *ngIf="isAuthenticated" [routerLink]="['/profile']">
+    View profile
+  </a>
+  <button
+    mat-raised-button
+    color="primary"
+    *ngIf="!isAuthenticated"
+    (click)="login()"
+  >
+    Login In
+  </button>
+</mat-card>

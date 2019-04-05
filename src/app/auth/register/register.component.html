@@ -1,3 +1,26 @@
-<p>
-  register works!
-</p>
+<mat-card-content>
+  <form novalidate [formGroup]="registerForm" (ngSubmit)="submit()">
+    <div class="register-container">
+      <mat-form-field>
+        <input formControlName="email" matInput placeholder="Email" />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          formControlName="password"
+          matInput
+          placeholder="Password"
+          type="password"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          formControlName="confirmPassword"
+          matInput
+          placeholder="Confirm password"
+          type="password"
+        />
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary">Submit</button>
+  </form>
+</mat-card-content>

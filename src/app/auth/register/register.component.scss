@@ -1,0 +1,14 @@
+.register-container {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-card-actions {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+form {
+  padding: 20px 0;
+}

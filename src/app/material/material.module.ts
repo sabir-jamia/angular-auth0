@@ -13,6 +13,7 @@ import {
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTabsModule } from '@angular/material/tabs';
 
 const materialModules = [
   MatSidenavModule,
@@ -25,7 +26,8 @@ const materialModules = [
   MatFormFieldModule,
   MatOptionModule,
   MatSelectModule,
-  MatInputModule
+  MatInputModule,
+  MatTabsModule
 ];
 
 @NgModule({

@@ -1,7 +1,7 @@
 <mat-sidenav-container class="side-nav-container">
   <mat-sidenav
     mode="side"
-    opened="true"
+    [opened]="isAuthenticated"
     #sidenav
     class="side-nav mat-elevation-z10"
   >
@@ -22,9 +22,7 @@
       <mat-spinner></mat-spinner>
     </div>
     <div class="wrapper">
-      <mat-card>
-        <router-outlet></router-outlet>
-      </mat-card>
+      <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
