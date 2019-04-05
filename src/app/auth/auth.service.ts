@@ -4,7 +4,6 @@ import { environment } from '../../environments/environment';
 import { SessionService } from '../core/session.service';
 import { Router } from '@angular/router';
 import { ProfileModel } from '../shared/model/profile.model';
-import { JsonPipe } from '@angular/common';
 
 const {
   auth0_domain,
