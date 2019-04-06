@@ -14,7 +14,11 @@
   </mat-toolbar-row>
   <mat-toolbar-row *ngIf="!isAuthenticated">
     <span class="app-spacer"></span>
-    <button mat-button><span>About us</span></button>
-    <button mat-button><span>Contact us</span></button>
+    <button mat-button [routerLink]="['auth', 'login']">
+      <span>Register/Login</span>
+    </button>
+    <button mat-button [routerLink]="['about', 'Hello World']">
+      <span>About</span>
+    </button>
   </mat-toolbar-row>
 </mat-toolbar>

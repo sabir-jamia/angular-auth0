@@ -13,6 +13,7 @@ import { PublicModule } from './public/public.module';
 import { PrivateModule } from './private/private.module';
 import { CourseModule } from './course/course.module';
 import { AuthModule } from './auth/auth.module';
+import { AboutModule } from './about/about.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +29,7 @@ import { AuthModule } from './auth/auth.module';
     CallBackModule,
     CourseModule,
     AuthModule,
+    AboutModule,
     AppRoutingModule
   ],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -7,15 +7,13 @@ import { AuthService } from '../auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
-  loginForm = new FormGroup({
-    email: new FormControl('', []),
-    password: new FormControl('', [])
+export class LoginComponent {
+  loginForm = this.fb.group({
+    email: this.fb.control('', []),
+    password: this.fb.control('', [])
   });
 
-  constructor(private authService: AuthService) {}
-
-  ngOnInit() {}
+  constructor(private authService: AuthService, private fb: FormBuilder) {}
 
   submit() {
     console.log(this.loginForm.value);
