@@ -1,4 +1,8 @@
-<app-main-content
-  [isAuthenticated]="isAuthentciated"
-  [loading]="loading"
-></app-main-content>
+<button type="button" style="padding: 0.5rem;" (click)="show = !show">
+  Show/Hide Editor
+</button>
+<div *ngIf="show"><quill-editor [(html)]="html"></quill-editor></div>
+
+<pre>{{ html | json }}</pre>
+<!-- <app-main-content [isAuthenticated]="isAuthentciated" [loading]="loading">
+</app-main-content> -->

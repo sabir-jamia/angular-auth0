@@ -14,6 +14,7 @@ import { PrivateModule } from './private/private.module';
 import { CourseModule } from './course/course.module';
 import { AuthModule } from './auth/auth.module';
 import { AboutModule } from './about/about.module';
+import { QuillEditorModule } from './quill-editor/quill-editor.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +23,7 @@ import { AboutModule } from './about/about.module';
     CoreModule,
     BrowserModule,
     HttpClientModule,
+    QuillEditorModule,
     HomeModule,
     PublicModule,
     PrivateModule,
