@@ -6,9 +6,10 @@ import { RouterModule } from '@angular/router';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { MaterialModule } from '../material/material.module';
 import { MainContentComponent } from './main-content/main-content.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
-  declarations: [MainContentComponent, ToolbarComponent, MainContentComponent],
+  declarations: [MainContentComponent, ToolbarComponent, MainContentComponent, NotFoundComponent],
   imports: [CommonModule, RouterModule, MaterialModule],
   exports: [MainContentComponent]
 })

@@ -21,6 +21,10 @@ export class AppComponent {
 
   loading = false;
 
+  html = '';
+
+  show = false;
+
   title = 'angular-auth0';
 
   constructor(private router: Router, private authService: AuthService) {

@@ -1,7 +1,7 @@
 <button type="button" style="padding: 0.5rem;" (click)="show = !show">
   Show/Hide Editor
 </button>
-<div *ngIf="show"><quill-editor [(html)]="html"></quill-editor></div>
+<div *ngIf="show"><app-quill-editor [(html)]="html"></app-quill-editor></div>
 
 <pre>{{ html | json }}</pre>
 <!-- <app-main-content [isAuthenticated]="isAuthentciated" [loading]="loading">

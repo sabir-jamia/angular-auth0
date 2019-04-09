@@ -34,7 +34,7 @@ export class QuillEditorComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.editorServvice.loadQuill().subscribe(_ => {
+    this.editorServvice.lazyLoadQuill().subscribe(_ => {
       if (!Quill) {
         Quill = this.document.defaultView.Quill;
       }
@@ -48,7 +48,7 @@ export class QuillEditorComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const align = Quill.import('attributes/style/align');
+    const align = Quill.import('attributors/style/align');
     align.whiteList = ['right', 'center', 'justify'];
     Quill.register(align, true);
 
@@ -82,7 +82,7 @@ export class QuillEditorComponent implements OnInit, OnDestroy {
           }
 
           this.zone.run(() => {
-            this.htmlChange.emit(null);
+            this.htmlChange.emit(html);
           });
         }
       }

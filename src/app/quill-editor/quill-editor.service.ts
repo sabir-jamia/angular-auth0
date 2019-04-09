@@ -1,55 +1,58 @@
 import { Injectable, Inject } from '@angular/core';
 import { forkJoin, ReplaySubject, Observable } from 'rxjs';
-import { DOCUMENT } from '@angular/platform-browser';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuillEditorService {
-  private loadResources: { [url: string]: ReplaySubject<any> } = {};
+  private loadedResources: { [url: string]: ReplaySubject<any> } = {};
 
   constructor(@Inject(DOCUMENT) private document: any) {}
 
-  public loadQuill() {
+  lazyLoadQuill(): Observable<any> {
     return forkJoin([
-      this.loadCSS('../../node_modules/quill/dist/quill.core.css')
-      //this.loadJS('../../node_modules/quill/dist/quill.min.js')
+      this.loadStyle('assets/quill/quill.snow.css'),
+      this.loadScript('assets/quill/quill.min.js')
     ]);
   }
 
-  private loadJS(url: string): Observable<void> {
-    if (this.loadResources[url]) {
-      return this.loadResources[url].asObservable();
+  private loadScript(url: string): Observable<void> {
+    if (this.loadedResources[url]) {
+      return this.loadedResources[url].asObservable();
     }
 
-    this.loadResources[url] = new ReplaySubject();
+    this.loadedResources[url] = new ReplaySubject();
     let script = this.document.createElement('script');
+    script.type = 'text/javascript';
     script.src = url;
     script.async = true;
     script.onload = () => {
-      this.loadResources[url].next();
-      this.loadResources[url].complete();
+      this.loadedResources[url].next();
+      this.loadedResources[url].complete();
     };
 
     this.document.body.appendChild(script);
-    return this.loadResources[url].asObservable();
+    return this.loadedResources[url].asObservable();
   }
 
-  private loadCSS(url: string): Observable<void> {
-    if (this.loadResources[url]) {
-      return this.loadResources[url].asObservable();
+  private loadStyle(url: string): Observable<any> {
+    if (this.loadedResources[url]) {
+      return this.loadedResources[url].asObservable();
     }
 
-    this.loadResources[url] = new ReplaySubject();
+    this.loadedResources[url] = new ReplaySubject();
     let style = this.document.createElement('link');
     style.href = url;
+    style.type = 'text/css';
+    style.rel = 'stylesheet';
     style.onload = () => {
-      this.loadResources[url].next();
-      this.loadResources[url].complete();
+      this.loadedResources[url].next();
+      this.loadedResources[url].complete();
     };
 
-    let head = document.getElementsByTagName('head')[0];
-    head.append(style);
-    return this.loadResources[url].asObservable();
+    let head = this.document.head;
+    head.appendChild(style);
+    return this.loadedResources[url].asObservable();
   }
 }
